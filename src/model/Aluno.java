@@ -5,7 +5,6 @@ public class Aluno extends Pessoa{
     private float av1;
     private float av2;
     private float media;
-    private String situacao;
     
     public Aluno() {
         super();
@@ -16,7 +15,6 @@ public class Aluno extends Pessoa{
         this.av1 = av1;
         this.av2 = av2;
         this.media = media;
-        this.situacao = situacao;
     }
 
     public float getAv1() {
@@ -42,11 +40,35 @@ public class Aluno extends Pessoa{
     public void setMedia(float media) {
         this.media = media;
     }
-    public String getSituacao() {
-        return situacao;
+
+    public float calcularMedia(float nota1, float nota2) {
+        return (nota1 + nota2) / 2;
     }
 
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
+    @Override
+    public String getSituacao() {
+        String resultado;
+        if (media < 4){
+            resultado = "Reprovado";
+        } else if (media >= 4 && media < 7) {
+            resultado = "Prova Final";
+        } else {
+            resultado = "Aprovado";
+        }      
+        return resultado;
     }
+
+    @Override
+    public void imprimir(int pos) {
+        System.out.printf("%d :: %s - %d - Nota 2: %.2f - Nota 1: %.2f - Media: %.2f - %s \n", 
+            pos,
+            getNome(), 
+            getIdade(),
+            this.getAv1(),
+            this.getAv2(),
+            this.getMedia(),
+            getSituacao()
+            );
+    }
+
 }
