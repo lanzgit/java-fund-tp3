@@ -10,8 +10,11 @@ public class Aluno extends Pessoa{
         super();
     }
 
-    public Aluno(String nome, int idade, float av1, float av2, float media, String situacao) {
-        super(nome, idade);
+    public Aluno(
+        int id, String nome, String nomeMeio, String ultimoNome, int idade,
+        float av1, float av2, float media, String situacao) {
+
+        super(id, nome, nomeMeio, ultimoNome, idade);
         this.av1 = av1;
         this.av2 = av2;
         this.media = media;
@@ -59,9 +62,9 @@ public class Aluno extends Pessoa{
     }
 
     @Override
-    public void imprimir(int pos) {
+    public void imprimir() {
         System.out.printf("%d :: %s - %d - Nota 2: %.2f - Nota 1: %.2f - Media: %.2f - %s \n", 
-            pos,
+            getId(),
             getNome(), 
             getIdade(),
             this.getAv1(),

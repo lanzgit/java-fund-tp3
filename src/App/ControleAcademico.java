@@ -1,6 +1,5 @@
 package App;
 import java.util.Scanner;
-
 import model.Aluno;
 import model.Pessoa;
 import model.Professor;
@@ -19,6 +18,7 @@ public class ControleAcademico {
 
         Scanner in = new Scanner(System.in);
         String op = null;
+        String nomeCompleto;
         pessoas = new Pessoa[QTDE];
         
 
@@ -38,8 +38,14 @@ public class ControleAcademico {
                     if(index < QTDE) {
                         Professor prof = new Professor();
                         System.out.println("\nCADASTRAR PROFESSOR");
-                        System.out.print("Entre com o nome: ");
-                        prof.setNome(in.next());
+
+                        prof.setId(index);
+
+                        System.out.print("Entre com o nome completo: ");
+                        nomeCompleto = in.next();
+                        prof.setNome(nomeCompleto.substring(0, nomeCompleto.indexOf(" ")));
+                        prof.setNomeMeio(nomeCompleto.substring(nomeCompleto.indexOf(" ") + 1, nomeCompleto.lastIndexOf(" ")));
+                        prof.setUltimoNome(nomeCompleto.substring(nomeCompleto.lastIndexOf(" ") + 1));
 
                         System.out.print("Entre com a idade: ");
                         prof.setIdade(in.nextInt());
@@ -52,7 +58,7 @@ public class ControleAcademico {
 
                         pessoas[index] = prof;
                         System.out.println("Professor Cadastrado com sucesso:");
-                        pessoas[index].imprimir(index);
+                        pessoas[index].imprimir();
                         System.out.println();
                         index ++;
                     } else {
@@ -63,9 +69,15 @@ public class ControleAcademico {
                     if(index < QTDE) {
                         Aluno al = new Aluno();
                         System.out.println("\nCADASTRAR ALUNO");
-                        System.out.print("Entre com o nome: ");
-                        al.setNome(in.next());
 
+                        al.setId(index);
+
+                        System.out.print("Entre com o nome completo: ");
+                        nomeCompleto = in.next();
+                        al.setNome(nomeCompleto.substring(0, nomeCompleto.indexOf(" ")));
+                        al.setNomeMeio(nomeCompleto.substring(nomeCompleto.indexOf(" ") + 1, nomeCompleto.lastIndexOf(" ")));
+                        al.setUltimoNome(nomeCompleto.substring(nomeCompleto.lastIndexOf(" ") + 1));
+                        
                         System.out.print("Entre com a idade: ");
                         al.setIdade(in.nextInt());
 
@@ -78,7 +90,7 @@ public class ControleAcademico {
                         al.setMedia(al.calcularMedia(al.getAv1(), al.getAv2())); 
                         pessoas[index] = al;
                         System.out.println("Aluno cadastro com sucesso:");
-                        pessoas[index].imprimir(index);
+                        pessoas[index].imprimir();
                         index ++;
                     } else {
                         System.out.println("Capacidade maxima alcancada!");
@@ -90,7 +102,7 @@ public class ControleAcademico {
                     int pos = in.nextInt();
 
                     if (pos >= 0  && pos < index) {
-                        pessoas[pos].imprimir(pos);
+                        pessoas[pos].imprimir();
                         System.out.println();
                     } else {
                         System.out.println("Pessoa nao encontrada!");
@@ -105,5 +117,4 @@ public class ControleAcademico {
             }
         } while(!op.equals("4"));
     }
-    
 }

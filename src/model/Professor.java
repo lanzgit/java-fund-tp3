@@ -9,8 +9,11 @@ public class Professor extends Pessoa {
         super();
     }
 
-    public Professor(String nome, int idade, String disciplina, float salario) {
-        super(nome, idade);
+    public Professor(
+        int id, String nome, String nomeMeio, String ultimoNome,
+        int idade, String disciplina, float salario) {
+
+        super(id, nome, nomeMeio, ultimoNome, idade);
         this.disciplina = disciplina;
         this.salario = salario;
     }
@@ -43,9 +46,9 @@ public class Professor extends Pessoa {
     }
 
     @Override
-    public void imprimir(int pos) {
+    public void imprimir() {
         System.out.printf("%d :: %s - %d - %s - R$%.2f - %s \n", 
-            pos,
+            getId(),
             getNome(), 
             getIdade(),
             this.getDisciplina(),
