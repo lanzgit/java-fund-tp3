@@ -11,7 +11,6 @@ public class ControleAcademico {
     static int index = 0;
 
     public static void main(String[] args) {
-        
         menu();
     }
 
@@ -86,7 +85,11 @@ public class ControleAcademico {
                             al.setId(index);
 
                             System.out.print("Entre com o nome completo: ");
-                            al.setNome(in.nextLine());
+                            try {
+                                al.setNome(in.nextLine());
+                            } catch (NomeIncompletoException e) {
+                                e.getMessage();
+                            }
                             
                             System.out.print("Entre com a idade: ");
                             al.setIdade(in.nextInt());
@@ -103,8 +106,9 @@ public class ControleAcademico {
                             pessoas[index].imprimir();
                             index ++;
                         }
-                        catch (NomeIncompletoException e) {
-                            System.out.println(e.getMessage());
+                        finally {
+                            System.out.println("voltar...");
+                            in.nextLine();
                         }
                     } else {
                         System.out.println("Capacidade maxima alcancada!");
