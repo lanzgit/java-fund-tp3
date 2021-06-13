@@ -12,8 +12,8 @@ public class SplitName {
 
 
 		primeiroNome = nomeTodo.substring(0, nomeTodo.indexOf(" "));
-		nomeMeio = nomeTodo.substring(nomeTodo.indexOf(" ") + 1, nomeTodo.lastIndexOf(" "));
-		ultimoNome = nomeTodo.substring(nomeTodo.lastIndexOf(" ") + 1);
+		nomeMeio = nomeTodo.substring(nomeTodo.indexOf(" "), nomeTodo.lastIndexOf(" ")).trim();
+		ultimoNome = nomeTodo.substring(nomeTodo.lastIndexOf(" ")).trim();
 
 		System.out.println(primeiroNome);
 		System.out.println(nomeMeio);

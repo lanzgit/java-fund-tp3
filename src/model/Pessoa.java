@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.NomeIncompletoException;
+
 public abstract class Pessoa {
     
     private int id;
@@ -8,7 +10,8 @@ public abstract class Pessoa {
     private String ultimoNome;
     private int idade;
 
-    public Pessoa() {}
+    public Pessoa() {
+    }
 
     public Pessoa(int id, String nome, String nomeMeio, String ultimoNome, int idade) {
         super();
@@ -27,28 +30,35 @@ public abstract class Pessoa {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public StringBuilder getNome() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(nome);
+        sb.append(" ");
+        sb.append(nomeMeio);
+        sb.append(" ");
+        sb.append(ultimoNome);
+
+        return sb;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public void setNome(String nome) throws NomeIncompletoException {
 
-    public String getNomeMeio() {
-        return nomeMeio;
-    }
 
-    public void setNomeMeio(String nomeMeio) {
-        this.nomeMeio = nomeMeio;
-    }
+        int posInicial = nome.indexOf(" ");
+        int posFinal = nome.lastIndexOf(" ");
 
-    public String getUltimoNome() {
-        return ultimoNome;
-    }
+        if(posInicial == -1){
+            throw new NomeIncompletoException("Preenchimento imcompleto!");
+        }
 
-    public void setUltimoNome(String ultimoNome) {
-        this.ultimoNome = ultimoNome;
+        this.nome = nome.substring(0, posInicial);
+        this.nomeMeio = nome.substring(posInicial, posFinal).trim();
+        this.ultimoNome = nome.substring(posFinal).trim();
+
+        if (this.ultimoNome == null || this.nome == null || this.nomeMeio == null) {
+            throw new NomeIncompletoException("Preenchimento imcompleto!\nNome, sobrenome e ultimo nome...");
+        }
     }
 
     public int getIdade() {
